@@ -1,7 +1,144 @@
-<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Hexo总结 | Zero space</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/very-simple.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><!-- include the sidebar--><!-- include ./includes/sidebar.jade--><!-- Blog title and subtitle--><header><div class="container header"><a id="logo" href="/." class="title">Zero space</a><span class="subtitle"></span><label id="toggle-menu" for="menu" onclick><i class="fa fa-bars"></i></label></div></header><!-- use checkbox hack for toggle nav-bar on small screens--><input id="menu" type="checkbox"><!-- Navigation Links--><nav id="nav"><div class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a></div></nav><div id="header-margin-bar"></div><!-- gallery that comes before the header--><div class="wrapper"><div class="container post-header"><h1>Hexo总结</h1></div></div><div class="wrapper"><div class="container meta"><div class="post-time">2017-02-08</div></div></div><article><div class="container post"><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>  这是在window10 使用hexo和github搭建博客的总结。这是<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo文档</a> 。</p>
-<h2 id="Hexo快速开始"><a href="#Hexo快速开始" class="headerlink" title="Hexo快速开始"></a>Hexo快速开始</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">#安装hexo</div><div class="line">$npm install hexo-cli -g</div><div class="line"></div><div class="line"># 初始化blog文件夹</div><div class="line">$hexo init blog</div><div class="line"></div><div class="line">$npm install</div><div class="line"></div><div class="line">#可以在本机4000端口访问</div><div class="line">$hexo generate</div><div class="line">$hexo server</div><div class="line">```   </div><div class="line">## Hexo的一些命令</div><div class="line"></div><div class="line">```bash</div><div class="line">$ hexo new &quot;My New Post&quot;</div><div class="line"></div><div class="line"># 开启服务</div><div class="line">$ hexo server</div><div class="line"></div><div class="line"># 生成静态文件，就是把md变为html文件</div><div class="line">$ hexo generate</div><div class="line"></div><div class="line"># 发布到github上</div><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<h2 id="Hexo换主题说明"><a href="#Hexo换主题说明" class="headerlink" title="Hexo换主题说明"></a>Hexo换主题说明</h2><p>把下载的主题放到theme文件夹，更改_config.yml的theme为主题名就ok了，注意空格。<br>之后要清理一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$hexo clean</div><div class="line">$hexo generate</div></pre></td></tr></table></figure></p>
-</div><!-- comment system--><div class="container"><hr></div></article><footer id="footer"><div class="container"><div class="bar"><div class="social"><a href="mailto:think1024@qq.com" target="_blank"><i class="fa fa-envelope-o"></i></a><a href="https://github.com/https://think1024.github.io" target="_blank"><i class="fa fa-github"></i></a><a href="/atom.xml" target="_blank"><i class="fa fa-rss"></i></a></div><div class="footer">© 2017 <a href="/" rel="nofollow"></a>. Powered by <a rel="nofollow" target="_blank" href="https://hexo.io">Hexo</a>. Theme <a target="_blank" href="https://github.com/lotabout/very-simple">very-simple</a>.</div></div></div></footer><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
-    $(".fancybox").fancybox();
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>Hexo总结</title>
+  
+   <meta name="description" content="这是在window10 使用hexo和github搭建博客的总结。这是Hexo文档 。
+Hexo快速开始安装hexo1$npm install hexo-cli -g
+初始化blog文件夹1$hexo init blog
+可以在本机4000端口访问
+12$hexo generate$hexo ser">
+  
+
+  <meta property="og:title" content="Hexo总结"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Zero space"/>
+ <meta property="og:image" content="undefined"/>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Zero space" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<body>
+  <a id="top"></a>
+  <div id='wx_pic' style='display:none;'><img src='/wx_share.png'/></div>
+  <div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        Hexo总结
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2017-02-08T08:21:51.879Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2017-02-08
+</time>
+
+
+
+
+
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>  这是在window10 使用hexo和github搭建博客的总结。这是<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo文档</a> 。</p>
+<h2 id="Hexo快速开始"><a href="#Hexo快速开始" class="headerlink" title="Hexo快速开始"></a>Hexo快速开始</h2><p>安装hexo<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install hexo-cli -g</div></pre></td></tr></table></figure></p>
+<p>初始化blog文件夹<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$hexo</span> init blog</div></pre></td></tr></table></figure></p>
+<p>可以在本机4000端口访问</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$hexo generate</div><div class="line">$hexo server</div></pre></td></tr></table></figure>
+<h2 id="Hexo的一些命令"><a href="#Hexo的一些命令" class="headerlink" title="Hexo的一些命令"></a>Hexo的一些命令</h2><p>新建一个文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure></p>
+<p>开启服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure></p>
+<p>生成静态文件，就是把md变为html文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure></p>
+<p>发布到github上<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure></p>
+<h2 id="Hexo换主题说明"><a href="#Hexo换主题说明" class="headerlink" title="Hexo换主题说明"></a>Hexo换主题说明</h2><p>把下载的主题放到theme文件夹，更改_config.yml的theme为主题名就ok了，注意空格。<br>之后要清理一下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$hexo</span> clean</div><div class="line"><span class="variable">$hexo</span> generate</div></pre></td></tr></table></figure></p>
+
+
+  </article>
+  </script>
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        © zero 2017-2017
+    </div>
+    <div class="secondrow">
+        <a href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
 });
-</script></body></html>
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>

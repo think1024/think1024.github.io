@@ -1,4 +1,285 @@
-<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>Zero space</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/very-simple.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><!-- include the sidebar--><!-- include ./includes/sidebar.jade--><!-- Blog title and subtitle--><header><div class="container header"><a id="logo" href="/." class="title">Zero space</a><span class="subtitle"></span><label id="toggle-menu" for="menu" onclick><i class="fa fa-bars"></i></label></div></header><!-- use checkbox hack for toggle nav-bar on small screens--><input id="menu" type="checkbox"><!-- Navigation Links--><nav id="nav"><div class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a></div></nav><div id="header-margin-bar"></div><article><div id="index-main" class="container entries"><div class="post-entry"><div class="post-time">2017-02-08</div><div class="post-desc"><div class="post-title"><a href="/2017/02/08/Hexo总结/">Hexo总结</a></div><div class="post-content"><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>  这是在window10 使用hexo和github搭建博客的总结。这是<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo文档</a> 。</p></div><div class="post-meta"></div></div></div><div class="post-entry"><div class="post-time">2017-02-08</div><div class="post-desc"><div class="post-title"><a href="/2017/02/08/hello/">hello</a></div><div class="post-content"><p>#你好啊<br>第一篇<br>新开始</p></div><div class="post-meta"></div></div></div><div class="post-entry"><div class="post-time">2017-02-08</div><div class="post-desc"><div class="post-title"><a href="/2017/02/08/hello-world/">Hello World</a></div><div class="post-content"><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p></div><div class="post-meta"></div></div></div></div></article><div class="container page-navigator-wrapper"></div><footer id="footer"><div class="container"><div class="bar"><div class="social"><a href="mailto:think1024@qq.com" target="_blank"><i class="fa fa-envelope-o"></i></a><a href="https://github.com/https://think1024.github.io" target="_blank"><i class="fa fa-github"></i></a><a href="/atom.xml" target="_blank"><i class="fa fa-rss"></i></a></div><div class="footer">© 2017 <a href="/" rel="nofollow"></a>. Powered by <a rel="nofollow" target="_blank" href="https://hexo.io">Hexo</a>. Theme <a target="_blank" href="https://github.com/lotabout/very-simple">very-simple</a>.</div></div></div></footer><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
-    $(".fancybox").fancybox();
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>Zero space</title>
+  
+  
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="Zero space"/>
+ <meta property="og:image" content="undefined"/>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="Zero space" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<body>
+  <a id="top"></a>
+  <div id='wx_pic' style='display:none;'><img src='/wx_share.png'/></div>
+  <div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      <nav class="navigator"><nav class="navbar navbar-default navbar-fixed-top">
+  <div class="nav-container">
+
+
+  
+  <div id="site_search" class="">
+  <input type="text" id="local-search-input" name="q" placeholder="search" class="form-control"/>
+</div>
+<div id="local-search-result"></div>
+
+
+  <ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+      <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-link fa-lg"></i>
+      </a>
+      <ul class="dropdown-content">
+        
+          <li>
+            <a href="/links.html">
+        友情链接
+      </a>
+    </li>
+     
+          <li>
+            <a href="https://github.com/think1024/">
+        Github
+      </a>
+    </li>
+     
+          <li>
+            <a href="http://weibo.com/">
+        微博
+      </a>
+    </li>
+     
+          <li>
+            <a href="https://www.zhihu.com/">
+        知乎
+      </a>
+    </li>
+     
+          <li>
+            <a href="/rss2.xml">
+        rss
+      </a>
+    </li>
+     
+          <li>
+            <a href="/">
+        关于我
+      </a>
+    </li>
+     
+    </ul>
+    </li>
+    <li class="archives"><a href="/archives">
+      <i class="fa fa-archive fa-lg"></i>
+    </a></li>
+  </ul>
+  </div>
+</nav></nav>
+<ul class="posts">
+  
+    
+<div>
+<li class="post-item">
+  
+  
+    <h1 class="index-title">
+        <a href="/2017/02/08/Hexo总结/">
+            Hexo总结
+        </a>
+    </h1>
+  
+
+
+  <div class="excerpt">
+  
+    这是在window10 使用hexo和github搭建博客的总结。这是Hexo文档 。
+Hexo快速开始安装hexo1$npm install hexo-cli -g
+初始化blog文件夹1$hexo init blog
+可以在本机4000
+  
+  <a href="/2017/02/08/Hexo总结/">
+    more
+  </a>
+  </div>
+  <div class="index-meta">
+    
+<time datetime="2017-02-08T08:21:51.879Z" itemprop="datePublished">
+  <i class="fa fa-calendar"></i>&nbsp;
+  02-08
+</time>
+
+
+
+
+
+
+
+  </div>
+</li>
+</div>
+<hr>
+
+
+
+
+  
+    
+<div>
+<li class="post-item">
+  
+  
+    <h1 class="index-title">
+        <a href="/2017/02/08/hello/">
+            hello
+        </a>
+    </h1>
+  
+
+
+  <div class="excerpt">
+  
+    #你好啊第一篇新开始
+  
+  <a href="/2017/02/08/hello/">
+    more
+  </a>
+  </div>
+  <div class="index-meta">
+    
+<time datetime="2017-02-08T05:33:19.000Z" itemprop="datePublished">
+  <i class="fa fa-calendar"></i>&nbsp;
+  02-08
+</time>
+
+
+
+
+
+
+
+  </div>
+</li>
+</div>
+<hr>
+
+
+
+
+  
+    
+<div>
+<li class="post-item">
+  
+  
+    <h1 class="index-title">
+        <a href="/2017/02/08/hello-world/">
+            Hello World
+        </a>
+    </h1>
+  
+
+
+  <div class="excerpt">
+  
+    Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hex
+  
+  <a href="/2017/02/08/hello-world/">
+    more
+  </a>
+  </div>
+  <div class="index-meta">
+    
+<time datetime="2017-02-07T16:00:00.000Z" itemprop="datePublished">
+  <i class="fa fa-calendar"></i>&nbsp;
+  02-08
+</time>
+
+
+
+
+
+
+
+  </div>
+</li>
+</div>
+<hr>
+
+
+
+
+  
+</ul>
+<ul class="pager">
+    <span class="page-number current">1</span>
+</ul>
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        © zero 2017-2017
+    </div>
+    <div class="secondrow">
+        <a href="https://github.com/gaoryrt/hexo-theme-pln">
+        Theme Pln
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
 });
-</script></body></html>
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
