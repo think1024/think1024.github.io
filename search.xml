@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+    
+    <entry>
+      <title><![CDATA[Java笔记1]]></title>
+      <url>%2F2017%2F02%2F09%2FJava%E7%AC%94%E8%AE%B01%2F</url>
+      <content type="text"><![CDATA[java学习遇到的一些bug 问题1问题今天学习Mybatis，tomcat8运行时错误。12345678910111213141516171819202122232425262728293031二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol pause信息: Pausing ProtocolHandler [&quot;http-nio-8080&quot;]二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol pause信息: Pausing ProtocolHandler [&quot;ajp-apr-8009&quot;]二月 08, 2017 9:03:16 下午 org.apache.catalina.core.StandardService stopInternal信息: Stopping service Catalina二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy信息: Destroying ProtocolHandler [&quot;http-nio-8080&quot;]二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy严重: Failed to destroy end point associated with ProtocolHandler [&quot;http-nio-8080&quot;]java.lang.NullPointerException at org.apache.tomcat.util.net.NioEndpoint.releaseCaches(NioEndpoint.java:316) at org.apache.tomcat.util.net.NioEndpoint.unbind(NioEndpoint.java:492) at org.apache.tomcat.util.net.AbstractEndpoint.destroy(AbstractEndpoint.java:821) at org.apache.coyote.AbstractProtocol.destroy(AbstractProtocol.java:534) at org.apache.catalina.connector.Connector.destroyInternal(Connector.java:1023) at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297) at org.apache.catalina.core.StandardService.destroyInternal(StandardService.java:589) at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297) at org.apache.catalina.core.StandardServer.destroyInternal(StandardServer.java:877) at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297) at org.apache.catalina.startup.Catalina.start(Catalina.java:633) at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) at java.lang.reflect.Method.invoke(Unknown Source) at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:351) at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:485)二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy信息: Destroying ProtocolHandler [&quot;ajp-apr-8009&quot;] 解决百度说端口占用，查端口netstat -ano 没有发现8080被占用。干脆重新下载tomcat8，再试一试，不行。tomcat目录/conf/server.xml,修改8080端口之后更改了web.xml中的url-partten，可以运行了。 新的问题是无法访问。 问题2bug在换了tomcat服务器后，项目很多都报cannot be resolved to a type的问题。 解决这是服务器自带的servlet库未导入的原因。右键项目属性，转到Targeted Runtimes，选择一个服务器，例如Tomcat，单击应用，可以解决。 问题3bugtomcat可以启动了，但是不能访问tomcat主页，不能访问http://localhost:8080解决方法终止服务，删除tomcat下的项目，重新publish，双击Servers下的tomcat服务器，在Overview下的server Locations中，选择第二项：Use Tomcat installtion(takes control of Tomcat installation).之前失败时选的是第一项。之后可以访问tomcat主页。解决。 问题4bug可以运行了，但是jsp文件没有样式表，但是已经添加css了。 解决之前的都是相对路径，servlet对路径进行过一次跳转，所以要使用绝对路径。绝对路径写法：]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hexo总结]]></title>
+      <url>%2F2017%2F02%2F08%2FHexo%E6%80%BB%E7%BB%93%2F</url>
+      <content type="text"><![CDATA[这是在window10 使用hexo和github搭建博客的总结。这是Hexo文档 。 Hexo快速开始安装hexo1$npm install hexo-cli -g 初始化blog文件夹1$hexo init blog 可以在本机4000端口访问 12$hexo generate$hexo server Hexo的一些命令新建一个文件1$ hexo new "My New Post" 开启服务1$ hexo server 生成静态文件，就是把md变为html文件1$ hexo generate 发布到github上1$ hexo deploy Hexo换主题说明把下载的主题放到theme文件夹，更改_config.yml的theme为主题名就ok了，注意空格。之后要清理一下12$hexo clean$hexo generate]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[hello]]></title>
+      <url>%2F2017%2F02%2F08%2Fhello%2F</url>
+      <content type="text"><![CDATA[#你好啊第一篇新开始]]></content>
+    </entry>
+
+    
+    <entry>
+      <title><![CDATA[Hello World]]></title>
+      <url>%2F2017%2F02%2F08%2Fhello-world%2F</url>
+      <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
+    </entry>
+
+    
+  
+  
+</search>

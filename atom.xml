@@ -5,10 +5,52 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-02-08T09:49:54.000Z</updated>
+  <updated>2017-02-09T06:40:32.534Z</updated>
   <id>http://yoursite.com/</id>
   
+  <author>
+    <name>Zero</name>
+    
+  </author>
+  
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java笔记1</title>
+    <link href="http://yoursite.com/2017/02/09/Java%E7%AC%94%E8%AE%B01/"/>
+    <id>http://yoursite.com/2017/02/09/Java笔记1/</id>
+    <published>2017-02-09T06:23:46.000Z</published>
+    <updated>2017-02-09T06:40:32.534Z</updated>
+    
+    <content type="html"><![CDATA[<p>java学习遇到的一些bug</p>
+<h2 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h2><p><code>问题</code><br>今天学习Mybatis，tomcat8运行时错误。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol pause</div><div class="line">信息: Pausing ProtocolHandler [&quot;http-nio-8080&quot;]</div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol pause</div><div class="line">信息: Pausing ProtocolHandler [&quot;ajp-apr-8009&quot;]</div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.catalina.core.StandardService stopInternal</div><div class="line">信息: Stopping service Catalina</div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy</div><div class="line">信息: Destroying ProtocolHandler [&quot;http-nio-8080&quot;]</div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy</div><div class="line">严重: Failed to destroy end point associated with ProtocolHandler [&quot;http-nio-8080&quot;]</div><div class="line">java.lang.NullPointerException</div><div class="line">	at org.apache.tomcat.util.net.NioEndpoint.releaseCaches(NioEndpoint.java:316)</div><div class="line">	at org.apache.tomcat.util.net.NioEndpoint.unbind(NioEndpoint.java:492)</div><div class="line">	at org.apache.tomcat.util.net.AbstractEndpoint.destroy(AbstractEndpoint.java:821)</div><div class="line">	at org.apache.coyote.AbstractProtocol.destroy(AbstractProtocol.java:534)</div><div class="line">	at org.apache.catalina.connector.Connector.destroyInternal(Connector.java:1023)</div><div class="line">	at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297)</div><div class="line">	at org.apache.catalina.core.StandardService.destroyInternal(StandardService.java:589)</div><div class="line">	at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297)</div><div class="line">	at org.apache.catalina.core.StandardServer.destroyInternal(StandardServer.java:877)</div><div class="line">	at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297)</div><div class="line">	at org.apache.catalina.startup.Catalina.start(Catalina.java:633)</div><div class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</div><div class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)</div><div class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)</div><div class="line">	at java.lang.reflect.Method.invoke(Unknown Source)</div><div class="line">	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:351)</div><div class="line">	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:485)</div><div class="line"></div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy</div><div class="line">信息: Destroying ProtocolHandler [&quot;ajp-apr-8009&quot;]</div></pre></td></tr></table></figure></p>
+<p><code>解决</code><br>百度说端口占用，查端口netstat -ano 没有发现8080被占用。<br>干脆重新下载tomcat8，再试一试，不行。<br>tomcat目录/conf/server.xml,修改8080端口<br>之后更改了web.xml中的url-partten，可以运行了。</p>
+<p>新的问题是无法访问。</p>
+<hr>
+<h2 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h2><p><code>bug</code><br>在换了tomcat服务器后，项目很多都报cannot be resolved to a type的问题。</p>
+<p><code>解决</code><br>这是服务器自带的servlet库未导入的原因。<br>右键项目属性，转到Targeted Runtimes，选择一个服务器，例如Tomcat，单击应用，可以解决。</p>
+<hr>
+<h2 id="问题3"><a href="#问题3" class="headerlink" title="问题3"></a>问题3</h2><p><code>bug</code><br>tomcat可以启动了，但是不能访问tomcat主页，不能访问<a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a><br><code>解决方法</code><br>终止服务，删除tomcat下的项目，重新publish，双击Servers下的tomcat服务器，在Overview下的server Locations中，选择第二项：Use Tomcat installtion(takes control of Tomcat installation).之前失败时选的是第一项。之后可以访问tomcat主页。解决。</p>
+<hr>
+<h2 id="问题4"><a href="#问题4" class="headerlink" title="问题4"></a>问题4</h2><p><code>bug</code><br>可以运行了，但是jsp文件没有样式表，但是已经添加css了。</p>
+<p><code>解决</code><br>之前的都是相对路径，servlet对路径进行过一次跳转，所以要使用绝对路径。<br>绝对路径写法：</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;java学习遇到的一些bug&lt;/p&gt;
+&lt;h2 id=&quot;问题1&quot;&gt;&lt;a href=&quot;#问题1&quot; class=&quot;headerlink&quot; title=&quot;问题1&quot;&gt;&lt;/a&gt;问题1&lt;/h2&gt;&lt;p&gt;&lt;code&gt;问题&lt;/code&gt;&lt;br&gt;今天学习Mybatis，tomcat8运行时错误。
+    
+    </summary>
+    
+      <category term="Diary" scheme="http://yoursite.com/categories/Diary/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="bug" scheme="http://yoursite.com/tags/bug/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo总结</title>
@@ -64,7 +106,7 @@
     <link href="http://yoursite.com/2017/02/08/hello-world/"/>
     <id>http://yoursite.com/2017/02/08/hello-world/</id>
     <published>2017-02-07T16:00:00.000Z</published>
-    <updated>2017-02-08T06:00:06.414Z</updated>
+    <updated>2017-02-09T06:11:30.922Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
@@ -83,6 +125,12 @@
     
     </summary>
     
+      <category term="Test" scheme="http://yoursite.com/categories/Test/"/>
+    
+    
+      <category term="test" scheme="http://yoursite.com/tags/test/"/>
+    
+      <category term="demo" scheme="http://yoursite.com/tags/demo/"/>
     
   </entry>
   
