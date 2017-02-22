@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[arch安装]]></title>
+      <url>%2F2017%2F02%2F22%2Farch%E5%AE%89%E8%A3%85%2F</url>
+      <content type="text"><![CDATA[环境使用vmware虚拟机安装arch版本：archlinux-2017.02.01-dual.iso新建虚拟机的时候vmware没有检测出archliunx系统，所以就直接选了其他liunx3.x版 安装前准备网络连接archliunx 安装过程需要联网。1# ping -c 4 baidu.com 检查网络连接。4是发送4个数据包 建立硬盘分区。虚拟机总共分了10G。可以使用fdisk或cfdisk，或其他的都可以。这里用的是cfdisk.1# cfdisk 首先选第一个gpt。new第一个分区，大小1M，type是bios boot，这为后面安装grub准备。new第二个分区，9G。new第三个分区，默认剩余空间。最后write。 一些其它命令：fdisk -l /dev/sda 查看sda的分区。fdisk /dev/sda 进入对sda进行操作的环境n是创建新分区，之后一般默认，分区大小 +1G 等等 格式化将sda1和sda2格式化为ext412mkfs.ext4 /dev/sda1mkfs.ext4 /dev/sda2 格式swap分区,激活swap分区12mkswap /dev/sda3swapon /dev/sda3 查看文件系统文件类型 file -s /dev/sda1 挂载分区/dev/sda2 挂载到 根目录1mount /dev/sda2 /mnt 创建/boot,将/dev/sda1挂载到 /boot12mkdir /mnt/bootmount /dev/sda1 /mnt/boot 安装选择镜像编辑/etc/pacman.d/mirrorlist，将选择的mirror放到最上面，或者把文件备份，源文件只保留需要的mirror修改完后，更新源1pacman -Syy 安装系统1pacstrap -i /mnt base base-devel Fstab生成系统中的文件系统信息1genfstab -U /mnt &gt;&gt; /mnt/etc/fstab ChrootChange root 到新安装的系统1arch-chroot /mnt /bin/bash 系统配置设置标准时间1hwclock --systohc --utc 设置语言1234vi /etc/locale.genlocale-genecho LANG=en_US.UTF-8 &gt; /etc/locale.conf 设置主机名 设置 hostname，将其添加到/etc/hostname。1echo myhostname &gt; /etc/hostname 设置root密码1passwd 安装Grub123pacman -S grubgrub-install --target=i386-pc --recheck /dev/sdagrub-mkconfig -o /boot/grub/grub.cfg 卸载分区123exitumount /mntreboot 安装成功安装中的问题在第一次grub安装时出现错误1234grub-install --target=i386-pc /dev/sdagrub-install: warning: this GPT partition label contains no BIOS Boot Partition; embedding won&apos;t be possible.grub-install: warning: Embedding is not possible. GRUB can only be installed in this setup by using blocklists. However, blocklists are UNRELIABLE and their use is discouraged..grub-install: error: will not proceed with blocklists. 解决方法之前在分区的时候，没有首先分一个1M大小的bios boot类型分区，导致grub安装失败。]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[Java笔记1]]></title>
       <url>%2F2017%2F02%2F09%2FJava%E7%AC%94%E8%AE%B01%2F</url>
       <content type="text"><![CDATA[java学习遇到的一些bug 问题1问题今天学习Mybatis，tomcat8运行时错误。12345678910111213141516171819202122232425262728293031二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol pause信息: Pausing ProtocolHandler [&quot;http-nio-8080&quot;]二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol pause信息: Pausing ProtocolHandler [&quot;ajp-apr-8009&quot;]二月 08, 2017 9:03:16 下午 org.apache.catalina.core.StandardService stopInternal信息: Stopping service Catalina二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy信息: Destroying ProtocolHandler [&quot;http-nio-8080&quot;]二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy严重: Failed to destroy end point associated with ProtocolHandler [&quot;http-nio-8080&quot;]java.lang.NullPointerException at org.apache.tomcat.util.net.NioEndpoint.releaseCaches(NioEndpoint.java:316) at org.apache.tomcat.util.net.NioEndpoint.unbind(NioEndpoint.java:492) at org.apache.tomcat.util.net.AbstractEndpoint.destroy(AbstractEndpoint.java:821) at org.apache.coyote.AbstractProtocol.destroy(AbstractProtocol.java:534) at org.apache.catalina.connector.Connector.destroyInternal(Connector.java:1023) at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297) at org.apache.catalina.core.StandardService.destroyInternal(StandardService.java:589) at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297) at org.apache.catalina.core.StandardServer.destroyInternal(StandardServer.java:877) at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297) at org.apache.catalina.startup.Catalina.start(Catalina.java:633) at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source) at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source) at java.lang.reflect.Method.invoke(Unknown Source) at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:351) at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:485)二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy信息: Destroying ProtocolHandler [&quot;ajp-apr-8009&quot;] 解决百度说端口占用，查端口netstat -ano 没有发现8080被占用。干脆重新下载tomcat8，再试一试，不行。tomcat目录/conf/server.xml,修改8080端口之后更改了web.xml中的url-partten，可以运行了。 新的问题是无法访问。 问题2bug在换了tomcat服务器后，项目很多都报cannot be resolved to a type的问题。 解决这是服务器自带的servlet库未导入的原因。右键项目属性，转到Targeted Runtimes，选择一个服务器，例如Tomcat，单击应用，可以解决。 问题3bugtomcat可以启动了，但是不能访问tomcat主页，不能访问http://localhost:8080解决方法终止服务，删除tomcat下的项目，重新publish，双击Servers下的tomcat服务器，在Overview下的server Locations中，选择第二项：Use Tomcat installtion(takes control of Tomcat installation).之前失败时选的是第一项。之后可以访问tomcat主页。解决。 问题4bug可以运行了，但是jsp文件没有样式表，但是已经添加css了。 解决之前的都是相对路径，servlet对路径进行过一次跳转，所以要使用绝对路径。绝对路径写法：]]></content>
@@ -13,13 +20,6 @@
       <title><![CDATA[Hexo总结]]></title>
       <url>%2F2017%2F02%2F08%2FHexo%E6%80%BB%E7%BB%93%2F</url>
       <content type="text"><![CDATA[这是在window10 使用hexo和github搭建博客的总结。这是Hexo文档 。 Hexo快速开始安装hexo1$npm install hexo-cli -g 初始化blog文件夹1$hexo init blog 可以在本机4000端口访问 12$hexo generate$hexo server Hexo的一些命令新建一个文件1$ hexo new "My New Post" 开启服务1$ hexo server 生成静态文件，就是把md变为html文件1$ hexo generate 发布到github上1$ hexo deploy Hexo换主题说明把下载的主题放到theme文件夹，更改_config.yml的theme为主题名就ok了，注意空格。之后要清理一下12$hexo clean$hexo generate]]></content>
-    </entry>
-
-    
-    <entry>
-      <title><![CDATA[hello]]></title>
-      <url>%2F2017%2F02%2F08%2Fhello%2F</url>
-      <content type="text"><![CDATA[#你好啊第一篇新开始]]></content>
     </entry>
 
     
