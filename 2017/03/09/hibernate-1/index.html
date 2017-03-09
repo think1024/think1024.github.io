@@ -1,0 +1,24 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> hibernate-1 · Zero space</title><meta name="description" content="hibernate-1 - Zero"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://think1024.github.io/atom.xml" title="Zero space"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/think1024" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">hibernate-1</h1><div class="post-info">Mar 9, 2017</div><div class="post-content"><h2 id="1-hibernate包导入"><a href="#1-hibernate包导入" class="headerlink" title="1.hibernate包导入"></a>1.hibernate包导入</h2><p>lib/required 下<br>本身没有日志包，需要导入 log4j slf4j</p>
+<h2 id="2-配置映射关系"><a href="#2-配置映射关系" class="headerlink" title="2.配置映射关系"></a>2.配置映射关系</h2><p>配置文件的名称和位置没要求，建议在实体类包里面<br>建议名称：<code>名称.hbm.xml</code><br><code>property</code> 中name和column相同时，可以省略column</p>
+<h2 id="3-核心配置文件"><a href="#3-核心配置文件" class="headerlink" title="3.核心配置文件"></a>3.核心配置文件</h2><p>位置和名称固定<br>位置：src下<br>名称：hibernate.cfg.xml</p>
+<p>配置信息写在<code>&lt;session-factory&gt;</code>标签下<br>hibernate只加载核心配置文件，映射配置文件要在核心文件里配置</p>
+<ol>
+<li>配置数据库</li>
+<li>hibernate配置</li>
+<li>加载映射文件</li>
+</ol>
+<h2 id="4-操作"><a href="#4-操作" class="headerlink" title="4. 操作"></a>4. 操作</h2><ol>
+<li>加载hibernate核心配置文件</li>
+<li>创建sessionFactory对象</li>
+<li>使用sessionFactory创建session对象</li>
+<li>开启事务</li>
+<li>写crud操作（只有这个不固定）</li>
+<li>提交事务</li>
+<li>关闭资源</li>
+</ol>
+<h2 id="5-hibernate的api"><a href="#5-hibernate的api" class="headerlink" title="5.hibernate的api"></a>5.hibernate的api</h2><p>Configuration:<br>找到hibernate.cfg.xml配置文件，并加载到对象里面</p>
+<p>SessionFactory:<br>到数据库根据映射关系，创建表<br>每次都要检查，浪费资源<br>一个项目中，创建一个SessionFactory对象</p>
+<p>在工具类中，静态代码实现。</p>
+<p>Session：<br>类似conncetion<br>实现crud<br>单线程对象，不能共用。</p>
+<p>Transaction</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2017/02/22/arch安装/" class="next">NEXT</a></div><div class="copyright"><p>© 2017 <a href="https://think1024.github.io">Zero</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>

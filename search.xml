@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[hibernate-1]]></title>
+      <url>%2F2017%2F03%2F09%2Fhibernate-1%2F</url>
+      <content type="text"><![CDATA[1.hibernate包导入lib/required 下本身没有日志包，需要导入 log4j slf4j 2.配置映射关系配置文件的名称和位置没要求，建议在实体类包里面建议名称：名称.hbm.xmlproperty 中name和column相同时，可以省略column 3.核心配置文件位置和名称固定位置：src下名称：hibernate.cfg.xml 配置信息写在&lt;session-factory&gt;标签下hibernate只加载核心配置文件，映射配置文件要在核心文件里配置 配置数据库 hibernate配置 加载映射文件 4. 操作 加载hibernate核心配置文件 创建sessionFactory对象 使用sessionFactory创建session对象 开启事务 写crud操作（只有这个不固定） 提交事务 关闭资源 5.hibernate的apiConfiguration:找到hibernate.cfg.xml配置文件，并加载到对象里面 SessionFactory:到数据库根据映射关系，创建表每次都要检查，浪费资源一个项目中，创建一个SessionFactory对象 在工具类中，静态代码实现。 Session：类似conncetion实现crud单线程对象，不能共用。 Transaction]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[arch安装]]></title>
       <url>%2F2017%2F02%2F22%2Farch%E5%AE%89%E8%A3%85%2F</url>
       <content type="text"><![CDATA[环境使用vmware虚拟机安装arch版本：archlinux-2017.02.01-dual.iso新建虚拟机的时候vmware没有检测出archliunx系统，所以就直接选了其他liunx3.x版 安装前准备网络连接archliunx 安装过程需要联网。1# ping -c 4 baidu.com 检查网络连接。4是发送4个数据包 建立硬盘分区。虚拟机总共分了10G。可以使用fdisk或cfdisk，或其他的都可以。这里用的是cfdisk.1# cfdisk 首先选第一个gpt。new第一个分区，大小1M，type是bios boot，这为后面安装grub准备。new第二个分区，9G。new第三个分区，默认剩余空间。最后write。 一些其它命令：fdisk -l /dev/sda 查看sda的分区。fdisk /dev/sda 进入对sda进行操作的环境n是创建新分区，之后一般默认，分区大小 +1G 等等 格式化将sda1和sda2格式化为ext412mkfs.ext4 /dev/sda1mkfs.ext4 /dev/sda2 格式swap分区,激活swap分区12mkswap /dev/sda3swapon /dev/sda3 查看文件系统文件类型 file -s /dev/sda1 挂载分区/dev/sda2 挂载到 根目录1mount /dev/sda2 /mnt 创建/boot,将/dev/sda1挂载到 /boot12mkdir /mnt/bootmount /dev/sda1 /mnt/boot 安装选择镜像编辑/etc/pacman.d/mirrorlist，将选择的mirror放到最上面，或者把文件备份，源文件只保留需要的mirror修改完后，更新源1pacman -Syy 安装系统1pacstrap -i /mnt base base-devel Fstab生成系统中的文件系统信息1genfstab -U /mnt &gt;&gt; /mnt/etc/fstab ChrootChange root 到新安装的系统1arch-chroot /mnt /bin/bash 系统配置设置标准时间1hwclock --systohc --utc 设置语言1234vi /etc/locale.genlocale-genecho LANG=en_US.UTF-8 &gt; /etc/locale.conf 设置主机名 设置 hostname，将其添加到/etc/hostname。1echo myhostname &gt; /etc/hostname 设置root密码1passwd 安装Grub123pacman -S grubgrub-install --target=i386-pc --recheck /dev/sdagrub-mkconfig -o /boot/grub/grub.cfg 卸载分区123exitumount /mntreboot 安装成功安装中的问题在第一次grub安装时出现错误1234grub-install --target=i386-pc /dev/sdagrub-install: warning: this GPT partition label contains no BIOS Boot Partition; embedding won&apos;t be possible.grub-install: warning: Embedding is not possible. GRUB can only be installed in this setup by using blocklists. However, blocklists are UNRELIABLE and their use is discouraged..grub-install: error: will not proceed with blocklists. 解决方法之前在分区的时候，没有首先分一个1M大小的bios boot类型分区，导致grub安装失败。]]></content>

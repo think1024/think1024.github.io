@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2017-02-22T14:52:02.886Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="https://think1024.github.io/"/>
+  <updated>2017-03-09T13:30:50.647Z</updated>
+  <id>https://think1024.github.io/</id>
   
   <author>
     <name>Zero</name>
@@ -16,13 +16,56 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>arch安装</title>
-    <link href="http://yoursite.com/2017/02/22/arch%E5%AE%89%E8%A3%85/"/>
-    <id>http://yoursite.com/2017/02/22/arch安装/</id>
-    <published>2017-02-22T12:38:47.000Z</published>
-    <updated>2017-02-22T14:52:02.886Z</updated>
+    <title>hibernate-1</title>
+    <link href="https://think1024.github.io/2017/03/09/hibernate-1/"/>
+    <id>https://think1024.github.io/2017/03/09/hibernate-1/</id>
+    <published>2017-03-09T13:22:35.000Z</published>
+    <updated>2017-03-09T13:30:50.647Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>使用vmware虚拟机安装<br>arch版本：archlinux-2017.02.01-dual.iso<br>新建虚拟机的时候vmware没有检测出archliunx系统，所以就直接选了<code>其他liunx3.x版</code></p>
+    <content type="html"><![CDATA[<h2 id="1-hibernate包导入"><a href="#1-hibernate包导入" class="headerlink" title="1.hibernate包导入"></a>1.hibernate包导入</h2><p>lib/required 下<br>本身没有日志包，需要导入 log4j slf4j</p>
+<h2 id="2-配置映射关系"><a href="#2-配置映射关系" class="headerlink" title="2.配置映射关系"></a>2.配置映射关系</h2><p>配置文件的名称和位置没要求，建议在实体类包里面<br>建议名称：<code>名称.hbm.xml</code><br><code>property</code> 中name和column相同时，可以省略column</p>
+<h2 id="3-核心配置文件"><a href="#3-核心配置文件" class="headerlink" title="3.核心配置文件"></a>3.核心配置文件</h2><p>位置和名称固定<br>位置：src下<br>名称：hibernate.cfg.xml</p>
+<p>配置信息写在<code>&lt;session-factory&gt;</code>标签下<br>hibernate只加载核心配置文件，映射配置文件要在核心文件里配置</p>
+<ol>
+<li>配置数据库</li>
+<li>hibernate配置</li>
+<li>加载映射文件</li>
+</ol>
+<h2 id="4-操作"><a href="#4-操作" class="headerlink" title="4. 操作"></a>4. 操作</h2><ol>
+<li>加载hibernate核心配置文件</li>
+<li>创建sessionFactory对象</li>
+<li>使用sessionFactory创建session对象</li>
+<li>开启事务</li>
+<li>写crud操作（只有这个不固定）</li>
+<li>提交事务</li>
+<li>关闭资源</li>
+</ol>
+<h2 id="5-hibernate的api"><a href="#5-hibernate的api" class="headerlink" title="5.hibernate的api"></a>5.hibernate的api</h2><p>Configuration:<br>找到hibernate.cfg.xml配置文件，并加载到对象里面</p>
+<p>SessionFactory:<br>到数据库根据映射关系，创建表<br>每次都要检查，浪费资源<br>一个项目中，创建一个SessionFactory对象</p>
+<p>在工具类中，静态代码实现。</p>
+<p>Session：<br>类似conncetion<br>实现crud<br>单线程对象，不能共用。</p>
+<p>Transaction</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-hibernate包导入&quot;&gt;&lt;a href=&quot;#1-hibernate包导入&quot; class=&quot;headerlink&quot; title=&quot;1.hibernate包导入&quot;&gt;&lt;/a&gt;1.hibernate包导入&lt;/h2&gt;&lt;p&gt;lib/required 下&lt;br&gt;本身没有
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>arch安装</title>
+    <link href="https://think1024.github.io/2017/02/22/arch%E5%AE%89%E8%A3%85/"/>
+    <id>https://think1024.github.io/2017/02/22/arch安装/</id>
+    <published>2017-02-22T12:38:47.000Z</published>
+    <updated>2017-02-23T04:43:16.022Z</updated>
+    
+    <content type="html"><![CDATA[<a id="more"></a>
+<!-- more -->
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>使用vmware虚拟机安装<br>arch版本：archlinux-2017.02.01-dual.iso<br>新建虚拟机的时候vmware没有检测出archliunx系统，所以就直接选了<code>其他liunx3.x版</code></p>
 <h2 id="安装前准备"><a href="#安装前准备" class="headerlink" title="安装前准备"></a>安装前准备</h2><h4 id="网络连接"><a href="#网络连接" class="headerlink" title="网络连接"></a>网络连接</h4><p>archliunx 安装过程需要联网。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># ping -c 4 baidu.com</div></pre></td></tr></table></figure></p>
 <p>检查网络连接。4是发送4个数据包</p>
 <h4 id="建立硬盘分区。"><a href="#建立硬盘分区。" class="headerlink" title="建立硬盘分区。"></a>建立硬盘分区。</h4><p>虚拟机总共分了10G。<br>可以使用fdisk或cfdisk，或其他的都可以。<br>这里用的是cfdisk.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># cfdisk</div></pre></td></tr></table></figure></p>
@@ -50,25 +93,27 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;环境&quot;&gt;&lt;a href=&quot;#环境&quot; class=&quot;headerlink&quot; title=&quot;环境&quot;&gt;&lt;/a&gt;环境&lt;/h2&gt;&lt;p&gt;使用vmware虚拟机安装&lt;br&gt;arch版本：archlinux-2017.02.01-dual.iso&lt;br&gt;新建虚拟机的时候vmwar
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;!-- more --&gt;
+&lt;h2 id=&quot;环境&quot;&gt;&lt;a href=&quot;#环境&quot; class=&quot;headerlink&quot; title=&quot;环境&quot;&gt;&lt;/a&gt;环境&lt;/h2&gt;&lt;p&gt;使用vmware虚拟机安装&lt;br&gt;arch版本：archlinux-2017
     
     </summary>
     
-      <category term="linux" scheme="http://yoursite.com/categories/linux/"/>
+      <category term="linux" scheme="https://think1024.github.io/categories/linux/"/>
     
     
-      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+      <category term="linux" scheme="https://think1024.github.io/tags/linux/"/>
     
-      <category term="arch" scheme="http://yoursite.com/tags/arch/"/>
+      <category term="arch" scheme="https://think1024.github.io/tags/arch/"/>
     
   </entry>
   
   <entry>
     <title>Java笔记1</title>
-    <link href="http://yoursite.com/2017/02/09/Java%E7%AC%94%E8%AE%B01/"/>
-    <id>http://yoursite.com/2017/02/09/Java笔记1/</id>
+    <link href="https://think1024.github.io/2017/02/09/Java%E7%AC%94%E8%AE%B01/"/>
+    <id>https://think1024.github.io/2017/02/09/Java笔记1/</id>
     <published>2017-02-09T06:23:46.000Z</published>
-    <updated>2017-02-09T06:40:32.534Z</updated>
+    <updated>2017-02-23T04:43:41.957Z</updated>
     
     <content type="html"><![CDATA[<p>java学习遇到的一些bug</p>
 <h2 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h2><p><code>问题</code><br>今天学习Mybatis，tomcat8运行时错误。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol pause</div><div class="line">信息: Pausing ProtocolHandler [&quot;http-nio-8080&quot;]</div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol pause</div><div class="line">信息: Pausing ProtocolHandler [&quot;ajp-apr-8009&quot;]</div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.catalina.core.StandardService stopInternal</div><div class="line">信息: Stopping service Catalina</div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy</div><div class="line">信息: Destroying ProtocolHandler [&quot;http-nio-8080&quot;]</div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy</div><div class="line">严重: Failed to destroy end point associated with ProtocolHandler [&quot;http-nio-8080&quot;]</div><div class="line">java.lang.NullPointerException</div><div class="line">	at org.apache.tomcat.util.net.NioEndpoint.releaseCaches(NioEndpoint.java:316)</div><div class="line">	at org.apache.tomcat.util.net.NioEndpoint.unbind(NioEndpoint.java:492)</div><div class="line">	at org.apache.tomcat.util.net.AbstractEndpoint.destroy(AbstractEndpoint.java:821)</div><div class="line">	at org.apache.coyote.AbstractProtocol.destroy(AbstractProtocol.java:534)</div><div class="line">	at org.apache.catalina.connector.Connector.destroyInternal(Connector.java:1023)</div><div class="line">	at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297)</div><div class="line">	at org.apache.catalina.core.StandardService.destroyInternal(StandardService.java:589)</div><div class="line">	at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297)</div><div class="line">	at org.apache.catalina.core.StandardServer.destroyInternal(StandardServer.java:877)</div><div class="line">	at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297)</div><div class="line">	at org.apache.catalina.startup.Catalina.start(Catalina.java:633)</div><div class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</div><div class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)</div><div class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)</div><div class="line">	at java.lang.reflect.Method.invoke(Unknown Source)</div><div class="line">	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:351)</div><div class="line">	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:485)</div><div class="line"></div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy</div><div class="line">信息: Destroying ProtocolHandler [&quot;ajp-apr-8009&quot;]</div></pre></td></tr></table></figure></p>
@@ -91,21 +136,21 @@
     
     </summary>
     
-      <category term="Diary" scheme="http://yoursite.com/categories/Diary/"/>
+      <category term="Diary" scheme="https://think1024.github.io/categories/Diary/"/>
     
     
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+      <category term="java" scheme="https://think1024.github.io/tags/java/"/>
     
-      <category term="bug" scheme="http://yoursite.com/tags/bug/"/>
+      <category term="bug" scheme="https://think1024.github.io/tags/bug/"/>
     
   </entry>
   
   <entry>
     <title>Hexo总结</title>
-    <link href="http://yoursite.com/2017/02/08/Hexo%E6%80%BB%E7%BB%93/"/>
-    <id>http://yoursite.com/2017/02/08/Hexo总结/</id>
+    <link href="https://think1024.github.io/2017/02/08/Hexo%E6%80%BB%E7%BB%93/"/>
+    <id>https://think1024.github.io/2017/02/08/Hexo总结/</id>
     <published>2017-02-08T08:21:51.879Z</published>
-    <updated>2017-02-08T09:49:54.000Z</updated>
+    <updated>2017-02-23T04:42:58.227Z</updated>
     
     <content type="html"><![CDATA[<p>  这是在window10 使用hexo和github搭建博客的总结。这是<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">Hexo文档</a> 。</p>
 <h2 id="Hexo快速开始"><a href="#Hexo快速开始" class="headerlink" title="Hexo快速开始"></a>Hexo快速开始</h2><p>安装hexo<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$npm</span> install hexo-cli -g</div></pre></td></tr></table></figure></p>
@@ -131,12 +176,13 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2017/02/08/hello-world/"/>
-    <id>http://yoursite.com/2017/02/08/hello-world/</id>
+    <link href="https://think1024.github.io/2017/02/08/hello-world/"/>
+    <id>https://think1024.github.io/2017/02/08/hello-world/</id>
     <published>2017-02-07T16:00:00.000Z</published>
-    <updated>2017-02-09T06:11:30.922Z</updated>
+    <updated>2017-02-23T04:43:02.000Z</updated>
     
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+    <content type="html"><![CDATA[<a id="more"></a>
+<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
@@ -149,16 +195,17 @@
     
     <summary type="html">
     
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a h
     
     </summary>
     
-      <category term="Test" scheme="http://yoursite.com/categories/Test/"/>
+      <category term="Test" scheme="https://think1024.github.io/categories/Test/"/>
     
     
-      <category term="test" scheme="http://yoursite.com/tags/test/"/>
+      <category term="test" scheme="https://think1024.github.io/tags/test/"/>
     
-      <category term="demo" scheme="http://yoursite.com/tags/demo/"/>
+      <category term="demo" scheme="https://think1024.github.io/tags/demo/"/>
     
   </entry>
   
