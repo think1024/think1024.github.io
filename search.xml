@@ -3,6 +3,13 @@
   
     
     <entry>
+      <title><![CDATA[多线程1 synchronized]]></title>
+      <url>%2F2017%2F09%2F02%2F%E5%A4%9A%E7%BA%BF%E7%A8%8B1-synchronized%2F</url>
+      <content type="text"><![CDATA[锁synchronizedsynchronized同步锁的作用范围有2种，分别是对象锁和类锁。 在方法上加synchronized和加代码块synchronized(this)的作用范围都是对象锁。 在静态方法上加synchronized和加代码块synchronized(this)的作用范围是类锁。、 类锁和对象锁之间互不影响，但是类锁和类锁、对象锁和对象锁之间有影响。 举例2个同步方法12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455public class SynProsess1 &#123; private String name; public SynProsess1(String name) &#123; this.name = name; &#125; public synchronized void test1() &#123; int i = 10; while(i-- &gt; 0) &#123; System.out.println("test1 : "+ i); try &#123; Thread.sleep(100); &#125; catch (InterruptedException e) &#123; e.printStackTrace(); &#125; &#125; &#125; public synchronized void test2() &#123; int i = 10; while(i-- &gt; 0) &#123; System.out.println("test2 : "+ i); try &#123; Thread.sleep(100); &#125; catch (InterruptedException e) &#123; e.printStackTrace(); &#125; &#125; &#125; public static void main(String[] args) &#123; SynProsess1 p1 = new SynProsess1("tom"); Thread t1 = new Thread(new Runnable()&#123; public void run() &#123; p1.test1(); &#125;&#125;); Thread t2 = new Thread(new Runnable() &#123; public void run() &#123; p1.test2(); &#125; &#125;); t1.start(); t2.start(); &#125;&#125;//运行结果。这两个方法一个执行完后，另一个才执行。// 同步方法和类同步代码块1234567891011public synchronized void test1()&#123; ///&#125;public void test2()&#123; synchronized(SynDemo.class)&#123; /// &#125;&#125;public static synchronized void test3()&#123;&#125;//类代码块相当于静态同步方法。//test2等价于test3]]></content>
+    </entry>
+
+    
+    <entry>
       <title><![CDATA[hibernate-1]]></title>
       <url>%2F2017%2F03%2F09%2Fhibernate-1%2F</url>
       <content type="text"><![CDATA[1.hibernate包导入lib/required 下本身没有日志包，需要导入 log4j slf4j 2.配置映射关系配置文件的名称和位置没要求，建议在实体类包里面建议名称：名称.hbm.xmlproperty 中name和column相同时，可以省略column 3.核心配置文件位置和名称固定位置：src下名称：hibernate.cfg.xml 配置信息写在&lt;session-factory&gt;标签下hibernate只加载核心配置文件，映射配置文件要在核心文件里配置 配置数据库 hibernate配置 加载映射文件 4. 操作 加载hibernate核心配置文件 创建sessionFactory对象 使用sessionFactory创建session对象 开启事务 写crud操作（只有这个不固定） 提交事务 关闭资源 5.hibernate的apiConfiguration:找到hibernate.cfg.xml配置文件，并加载到对象里面 SessionFactory:到数据库根据映射关系，创建表每次都要检查，浪费资源一个项目中，创建一个SessionFactory对象 在工具类中，静态代码实现。 Session：类似conncetion实现crud单线程对象，不能共用。 Transaction]]></content>
