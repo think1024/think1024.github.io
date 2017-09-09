@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="clojure学习 1"/>
+
+
+
+
+  <meta name="keywords" content="clojure, Zero space" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zero space">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.5.0" />
+
+
+
+<link rel="canonical" href="https://think1024.github.io/2017/09/04/clojure学习-1/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.5.0" />
+
+
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+    <title> clojure学习 1 - Zero space </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Zero space</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            About
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Zero space</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          clojure学习 1
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-09-04
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/clojure/">clojure</a>
+            
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-vec-vector-list"><span class="toc-text">1. vec vector list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-conj-加入列表"><span class="toc-text">2. conj 加入列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-set-没有重复的"><span class="toc-text">3. set 没有重复的  {}</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-map"><span class="toc-text">4. map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-rest"><span class="toc-text">5. rest</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-map"><span class="toc-text">6. map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-循环"><span class="toc-text">7. 循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-drop-n-seq"><span class="toc-text">8. drop n seq</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>clojure学习1<br><a id="more"></a></p>
+<h2 id="1-vec-vector-list"><a href="#1-vec-vector-list" class="headerlink" title="1. vec vector list"></a>1. vec vector list</h2><figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">( = [ <span class="symbol">:a</span> <span class="symbol">:b</span> <span class="symbol">:c</span>] </div><div class="line">    ( list <span class="symbol">:a</span>  <span class="symbol">:b</span>  <span class="symbol">:c</span> ) </div><div class="line">    ( vec ' ( <span class="symbol">:a</span>  <span class="symbol">:b</span>  <span class="symbol">:c</span> ) ) </div><div class="line">    ( vector <span class="symbol">:a</span>  <span class="symbol">:b</span>  <span class="symbol">:c</span> ) )</div></pre></td></tr></table></figure>
+<h2 id="2-conj-加入列表"><a href="#2-conj-加入列表" class="headerlink" title="2. conj 加入列表"></a>2. conj 加入列表</h2><p> vector 和 list 顺序不同，list在前面，vector在后面<br> conj set 没有顺序</p>
+<h2 id="3-set-没有重复的"><a href="#3-set-没有重复的" class="headerlink" title="3. set 没有重复的  {}"></a>3. set 没有重复的  {}</h2> <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#&#123;1 2 3 4&#125;</div><div class="line"></div><div class="line">(set '(1 2 3 4))</div></pre></td></tr></table></figure>
+<h2 id="4-map"><a href="#4-map" class="headerlink" title="4. map"></a>4. map</h2> <figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">def</span></span> maap &#123;<span class="symbol">:a</span> <span class="number">1</span>,<span class="symbol">:b</span> <span class="number">2</span>&#125;)</div><div class="line"></div><div class="line"><span class="comment">;(:a maap) 等于 (maap :a) 前面后面都一样。</span></div></pre></td></tr></table></figure>
+<h2 id="5-rest"><a href="#5-rest" class="headerlink" title="5. rest"></a>5. rest</h2><figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">;返回除了第一个剩下的，格式为list</span></div></pre></td></tr></table></figure>
+<h2 id="6-map"><a href="#6-map" class="headerlink" title="6. map"></a>6. map</h2><figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">map</span></span> fn sequence)</div><div class="line"><span class="comment">;sequence 可以是list vector set</span></div></pre></td></tr></table></figure>
+<h2 id="7-循环"><a href="#7-循环" class="headerlink" title="7. 循环"></a>7. 循环</h2><ol>
+<li>recur</li>
+<li>loop</li>
+</ol>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">;累加器</span></div><div class="line">(<span class="name"><span class="builtin-name">defn</span></span> fun [sum x]</div><div class="line">    (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">pos?</span></span> x)</div><div class="line">        (<span class="name"><span class="builtin-name">recur</span></span> (<span class="name"><span class="builtin-name">+</span></span> sum x) (<span class="name"><span class="builtin-name">dec</span></span> x))</div><div class="line">        sum</div><div class="line">    )</div><div class="line">)</div></pre></td></tr></table></figure>
+<h2 id="8-drop-n-seq"><a href="#8-drop-n-seq" class="headerlink" title="8. drop n seq"></a>8. drop n seq</h2><figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">drop</span></span> <span class="number">3</span> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>])</div><div class="line"></div><div class="line"><span class="comment">;=&gt;(4 5 6)</span></div><div class="line"><span class="comment">;去掉seq的前n个</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/clojure/">clojure</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2017/09/02/多线程2-Runnable-Thread/">
+        <span class="next-text nav-default">多线程2 Runnable&Thread</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:think1024@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+        
+          <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/think1024" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Zero</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.5.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.5.0"></script>
+
+  </body>
+</html>

@@ -1,4 +1,207 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Java笔记1 · Zero space</title><meta name="description" content="Java笔记1 - Zero"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://think1024.github.io/atom.xml" title="Zero space"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="https://github.com/think1024" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">Java笔记1</h1><div class="post-info">Feb 9, 2017</div><div class="post-content"><p>java学习遇到的一些bug</p>
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Java笔记1"/>
+
+
+
+
+  <meta name="keywords" content="java, bug, Zero space" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zero space">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.5.0" />
+
+
+
+<link rel="canonical" href="https://think1024.github.io/2017/02/09/Java笔记1/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.5.0" />
+
+
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+    <title> Java笔记1 - Zero space </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Zero space</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            About
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Zero space</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Java笔记1
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-02-09
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/Diary/">Diary</a>
+            
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#问题1"><span class="toc-text">问题1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题2"><span class="toc-text">问题2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题3"><span class="toc-text">问题3</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#问题4"><span class="toc-text">问题4</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>一些bug<br><a id="more"></a><br>java学习遇到的一些bug</p>
 <h2 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h2><p><code>问题</code><br>今天学习Mybatis，tomcat8运行时错误。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol pause</div><div class="line">信息: Pausing ProtocolHandler [&quot;http-nio-8080&quot;]</div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol pause</div><div class="line">信息: Pausing ProtocolHandler [&quot;ajp-apr-8009&quot;]</div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.catalina.core.StandardService stopInternal</div><div class="line">信息: Stopping service Catalina</div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy</div><div class="line">信息: Destroying ProtocolHandler [&quot;http-nio-8080&quot;]</div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy</div><div class="line">严重: Failed to destroy end point associated with ProtocolHandler [&quot;http-nio-8080&quot;]</div><div class="line">java.lang.NullPointerException</div><div class="line">	at org.apache.tomcat.util.net.NioEndpoint.releaseCaches(NioEndpoint.java:316)</div><div class="line">	at org.apache.tomcat.util.net.NioEndpoint.unbind(NioEndpoint.java:492)</div><div class="line">	at org.apache.tomcat.util.net.AbstractEndpoint.destroy(AbstractEndpoint.java:821)</div><div class="line">	at org.apache.coyote.AbstractProtocol.destroy(AbstractProtocol.java:534)</div><div class="line">	at org.apache.catalina.connector.Connector.destroyInternal(Connector.java:1023)</div><div class="line">	at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297)</div><div class="line">	at org.apache.catalina.core.StandardService.destroyInternal(StandardService.java:589)</div><div class="line">	at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297)</div><div class="line">	at org.apache.catalina.core.StandardServer.destroyInternal(StandardServer.java:877)</div><div class="line">	at org.apache.catalina.util.LifecycleBase.destroy(LifecycleBase.java:297)</div><div class="line">	at org.apache.catalina.startup.Catalina.start(Catalina.java:633)</div><div class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)</div><div class="line">	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)</div><div class="line">	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)</div><div class="line">	at java.lang.reflect.Method.invoke(Unknown Source)</div><div class="line">	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:351)</div><div class="line">	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:485)</div><div class="line"></div><div class="line">二月 08, 2017 9:03:16 下午 org.apache.coyote.AbstractProtocol destroy</div><div class="line">信息: Destroying ProtocolHandler [&quot;ajp-apr-8009&quot;]</div></pre></td></tr></table></figure></p>
 <p><code>解决</code><br>百度说端口占用，查端口netstat -ano 没有发现8080被占用。<br>干脆重新下载tomcat8，再试一试，不行。<br>tomcat目录/conf/server.xml,修改8080端口<br>之后更改了web.xml中的url-partten，可以运行了。</p>
 <p>新的问题是无法访问。</p>
@@ -10,4 +213,170 @@
 <hr>
 <h2 id="问题4"><a href="#问题4" class="headerlink" title="问题4"></a>问题4</h2><p><code>bug</code><br>可以运行了，但是jsp文件没有样式表，但是已经添加css了。</p>
 <p><code>解决</code><br>之前的都是相对路径，servlet对路径进行过一次跳转，所以要使用绝对路径。<br>绝对路径写法：</p>
-</div></article></div></main><footer><div class="paginator"><a href="/2017/02/22/arch安装/" class="prev">PREV</a><a href="/2017/02/08/Hexo总结/" class="next">NEXT</a></div><div class="copyright"><p>© 2017 <a href="https://think1024.github.io">Zero</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/java/">java</a>
+            
+              <a href="/tags/bug/">bug</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/02/22/arch安装/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">arch安装</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/02/08/Hexo总结/">
+        <span class="next-text nav-default">Hexo总结</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:think1024@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+        
+          <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/think1024" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Zero</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.5.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.5.0"></script>
+
+  </body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="多线程2 Runnable&Thread"/>
+
+
+
+
+  <meta name="keywords" content="java, 多线程, Zero space" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zero space">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.5.0" />
+
+
+
+<link rel="canonical" href="https://think1024.github.io/2017/09/02/多线程2-Runnable-Thread/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.5.0" />
+
+
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+    <title> 多线程2 Runnable&Thread - Zero space </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Zero space</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            About
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Zero space</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          多线程2 Runnable&Thread
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-09-02
+        </span>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#thread-和-runnable-的区别"><span class="toc-text">thread 和 runnable 的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-避免单继承的限制。"><span class="toc-text">1. 避免单继承的限制。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-共享资源。"><span class="toc-text">2. 共享资源。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thread-join"><span class="toc-text">Thread.join()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Thread-yield"><span class="toc-text">Thread.yield()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#wait-notify"><span class="toc-text">wait() notify()</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>runnable &amp; Thread<br><a id="more"></a></p>
+<h2 id="thread-和-runnable-的区别"><a href="#thread-和-runnable-的区别" class="headerlink" title="thread 和 runnable 的区别"></a>thread 和 runnable 的区别</h2><h3 id="1-避免单继承的限制。"><a href="#1-避免单继承的限制。" class="headerlink" title="1. 避免单继承的限制。"></a>1. 避免单继承的限制。</h3><pre><code>Thread实现了Runnable的接口，继承了Thread的类不能继承其他类了。
+</code></pre><h3 id="2-共享资源。"><a href="#2-共享资源。" class="headerlink" title="2. 共享资源。"></a>2. 共享资源。</h3><pre><code>在Thread中，一个Thread 如果 start() 多次，会错误。
+</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Thread1 t1 = <span class="keyword">new</span> Thread1(<span class="string">"a"</span>);</div><div class="line">t1.start();</div><div class="line">t2.start();</div></pre></td></tr></table></figure>
+<p>在实现Runnable时，一个可以start() 多次。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">MyThread t = <span class="keyword">new</span> MyThread(<span class="string">"a"</span>);</div><div class="line"><span class="keyword">new</span> Thread(t).start();</div><div class="line"><span class="keyword">new</span> Thread(t).start();</div></pre></td></tr></table></figure></p>
+<p>所以实现了资源共享。</p>
+<h2 id="Thread-join"><a href="#Thread-join" class="headerlink" title="Thread.join()"></a>Thread.join()</h2><p>join的意思是参加，<code>thread1.join()</code>意思是线程<code>thread1</code>参加进来。如果<code>thread2</code>正在执行，在<code>thread2</code> 里面调用<code>thread1.join()</code>,  <code>thread2</code> 就会等<code>thread1</code>执行完后再执行。</p>
+<h2 id="Thread-yield"><a href="#Thread-yield" class="headerlink" title="Thread.yield()"></a>Thread.yield()</h2><p><code>Thread.yield()</code>会让当前线程暂停，进入可运行状态，然后线程调度程序从 处于可运行状态的线程中选择一个执行。</p>
+<p>有可能一个线程<code>yield()</code>之后，被再一次选中执行。</p>
+<h2 id="wait-notify"><a href="#wait-notify" class="headerlink" title="wait() notify()"></a>wait() notify()</h2><p><code>wait()</code>和<code>notify()</code>是<code>Object</code>的方法。</p>
+<p><code>sleep()</code>和<code>yield()</code>是<code>Thread</code>的方法。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/java/">java</a>
+            
+              <a href="/tags/多线程/">多线程</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/09/04/clojure学习-1/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">clojure学习 1</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/09/02/多线程1-synchronized/">
+        <span class="next-text nav-default">多线程1 synchronized</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:think1024@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+        
+          <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/think1024" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Zero</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.5.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.5.0"></script>
+
+  </body>
+</html>
