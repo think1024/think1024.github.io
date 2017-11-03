@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="新的开始！"/>
+  <meta name="description" content="java 多维数组"/>
 
 
 
+
+  <meta name="keywords" content="java, Zero space" />
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="https://think1024.github.io/archives/2017/02/"/>
+<link rel="canonical" href="https://think1024.github.io/2017/09/17/java-多维数组/"/>
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.5.0" />
@@ -71,11 +73,7 @@
 
 
 
-    <title>
-  
-    Archives - Zero space
-  
-</title>
+    <title> java 多维数组 - Zero space </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -169,115 +167,90 @@
           <div id="content" class="content">
             
   
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title">
-          <span class="archive-post-counter">
-            15 Posts In Total
-          </span>
-        </div>
-      
-    
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          java 多维数组
+        
+      </h1>
 
-    
-      
+      <div class="post-meta">
+        <span class="post-time">
+          2017-09-17
+        </span>
         
-        
-
-        
-          
-          <div class="collection-title">
-            <h2 class="archive-year">2017</h2>
+          <div class="post-category">
+            
+              <a href="/categories/java/">java</a>
+            
           </div>
         
-      
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-22
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/02/22/arch安装/" class="archive-post-link">
-            arch安装
-          </a>
-        </span>
       </div>
-    
-      
-        
-        
+    </header>
 
-        
-      
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-09
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/02/09/Java笔记1/" class="archive-post-link">
-            Java笔记1
-          </a>
-        </span>
-      </div>
     
-      
-        
-        
+    
 
-        
+    <div class="post-content">
       
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-08
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/02/08/Hexo总结/" class="archive-post-link">
-            Hexo总结
-          </a>
-        </span>
-      </div>
-    
-      
-        
-        
+        <p>java的多维数组是靠一维数组实现的。<br><a id="more"></a></p>
+<p>多维数组可以看作是元素为数组的数组。比如arr[][],arr[] 的元素为数组的引用，可以说arr[]的元素就是二级数组的指针。</p>
+<p>arr的第二维数组元素的长度都是随意的。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span>[][] arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>][];<span class="comment">//第一个数2是必须的。</span></div><div class="line">arr[<span class="number">0</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">2</span>]; <span class="comment">//长度为2</span></div><div class="line">arr[<span class="number">1</span>] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">4</span>]; <span class="comment">//长度为4</span></div><div class="line">   </div><div class="line">   <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt; arr.length;i++)&#123;</div><div class="line">     <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>;j&lt;arr[i].length; j++)&#123;</div><div class="line">        System.out.println(<span class="string">"arr["</span>+i+<span class="string">"]["</span>+j+<span class="string">"] = "</span>+ arr[i][j]);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
-        
       
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-08
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/02/08/hello-world/" class="archive-post-link">
-            Hello World
-          </a>
-        </span>
-      </div>
-    
-  </section>
+    </div>
 
-  
-  <nav class="pagination">
     
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/java/">java</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/09/21/Map-Entry使用/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Map.Entry使用</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/09/17/java-集合框架-1/">
+        <span class="next-text nav-default">java 集合框架 1</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>  
       </main>
@@ -364,6 +337,8 @@
     </div>
 
     
+  
+
 
 
     

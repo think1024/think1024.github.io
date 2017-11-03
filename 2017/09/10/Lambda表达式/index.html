@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="新的开始！"/>
+  <meta name="description" content="java Lambda表达式"/>
 
 
 
+
+  <meta name="keywords" content="java8, 编程语言, Zero space" />
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="https://think1024.github.io/archives/2017/02/"/>
+<link rel="canonical" href="https://think1024.github.io/2017/09/10/Lambda表达式/"/>
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.5.0" />
@@ -71,11 +73,7 @@
 
 
 
-    <title>
-  
-    Archives - Zero space
-  
-</title>
+    <title> java Lambda表达式 - Zero space </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -169,115 +167,99 @@
           <div id="content" class="content">
             
   
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title">
-          <span class="archive-post-counter">
-            15 Posts In Total
-          </span>
-        </div>
-      
-    
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          java Lambda表达式
+        
+      </h1>
 
-    
-      
+      <div class="post-meta">
+        <span class="post-time">
+          2017-09-10
+        </span>
         
-        
-
-        
-          
-          <div class="collection-title">
-            <h2 class="archive-year">2017</h2>
+          <div class="post-category">
+            
+              <a href="/categories/java/">java</a>
+            
           </div>
         
-      
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-22
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/02/22/arch安装/" class="archive-post-link">
-            arch安装
-          </a>
-        </span>
       </div>
-    
-      
-        
-        
+    </header>
 
-        
-      
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-09
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/02/09/Java笔记1/" class="archive-post-link">
-            Java笔记1
-          </a>
-        </span>
-      </div>
     
-      
-        
-        
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Lambda表达式"><span class="toc-text">Lambda表达式</span></a></li></ol>
+    </div>
+  </div>
 
-        
-      
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-08
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/02/08/Hexo总结/" class="archive-post-link">
-            Hexo总结
-          </a>
-        </span>
-      </div>
-    
-      
-        
-        
 
-        
+    <div class="post-content">
       
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-08
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/02/08/hello-world/" class="archive-post-link">
-            Hello World
-          </a>
-        </span>
-      </div>
-    
-  </section>
+        <p>关于 lambda表达式。<br><a id="more"></a></p>
+<h2 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h2><p>Lambda表达式就是将函数作为参数传给另一个函数（方法）。<br>因为有时候有的函数方法只会使用一次，单独拿出来声明意义不大，最好将其作为匿名函数直接使用。<br>Lambda使用 <code>-&gt;</code> ，参数 -&gt; 代码块。<br>参数类型编译器会自己推断。<br>如果代码块只有一行，可以省略{} 和 return。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Arrays.asList(<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span>,<span class="string">"d"</span>).forEach( e -&gt;&#123;</div><div class="line">         System.out.println(e)</div><div class="line">         System.out.println(e) </div><div class="line">         &#125;);</div><div class="line"></div><div class="line">Arrays.asList(<span class="string">"a"</span>,<span class="string">"b"</span>,<span class="string">"c"</span>,<span class="string">"d"</span>).sort((e1,e2) -&gt; e1.compareTo(e2));</div></pre></td></tr></table></figure></p>
+<p>## </p>
 
-  
-  <nav class="pagination">
+      
+    </div>
+
     
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/java8/">java8</a>
+            
+              <a href="/tags/编程语言/">编程语言</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/09/10/RESTful/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">RESTful</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/09/04/clojure学习-1/">
+        <span class="next-text nav-default">clojure学习 1</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>  
       </main>
@@ -364,6 +346,8 @@
     </div>
 
     
+  
+
 
 
     

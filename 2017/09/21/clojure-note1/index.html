@@ -17,7 +17,7 @@
 
 
 
-  <meta name="description" content="clojure学习 1"/>
+  <meta name="description" content="clojure note1"/>
 
 
 
@@ -42,7 +42,7 @@
 
 
 
-<link rel="canonical" href="https://think1024.github.io/2017/09/04/clojure学习-1/"/>
+<link rel="canonical" href="https://think1024.github.io/2017/09/21/clojure-note1/"/>
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.5.0" />
@@ -73,7 +73,7 @@
 
 
 
-    <title> clojure学习 1 - Zero space </title>
+    <title> clojure note1 - Zero space </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -171,13 +171,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          clojure学习 1
+          clojure note1
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2017-09-04
+          2017-09-21
         </span>
         
           <div class="post-category">
@@ -194,14 +194,14 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">Contents</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-vec-vector-list"><span class="toc-text">1. vec vector list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-conj-加入列表"><span class="toc-text">2. conj 加入列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-set-没有重复的"><span class="toc-text">3. set 没有重复的  {}</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-map"><span class="toc-text">4. map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-rest"><span class="toc-text">5. rest</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-map"><span class="toc-text">6. map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-循环"><span class="toc-text">7. 循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-drop-n-seq"><span class="toc-text">8. drop n seq</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-vec-vector-list"><span class="toc-text">1. vec vector list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-conj-加入列表"><span class="toc-text">2. conj 加入列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-set-没有重复的"><span class="toc-text">3. set 没有重复的  {}</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-map"><span class="toc-text">4. map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-rest"><span class="toc-text">5. rest</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-map"><span class="toc-text">6. map</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-循环"><span class="toc-text">7. 循环</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-drop-n-seq"><span class="toc-text">8. drop n seq</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-斐波那契数列"><span class="toc-text">9. 斐波那契数列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-lazy-cat"><span class="toc-text">10. lazy-cat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-apply"><span class="toc-text">11. apply</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-re-seq-正则"><span class="toc-text">12 re-seq 正则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-partition-by"><span class="toc-text">13 partition-by</span></a></li></ol>
     </div>
   </div>
 
 
     <div class="post-content">
       
-        <p>clojure学习1<br><a id="more"></a></p>
+        <p>clojure练习中的一些函数。<br><a id="more"></a></p>
 <h2 id="1-vec-vector-list"><a href="#1-vec-vector-list" class="headerlink" title="1. vec vector list"></a>1. vec vector list</h2><figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">( = [ <span class="symbol">:a</span> <span class="symbol">:b</span> <span class="symbol">:c</span>] </div><div class="line">    ( list <span class="symbol">:a</span>  <span class="symbol">:b</span>  <span class="symbol">:c</span> ) </div><div class="line">    ( vec ' ( <span class="symbol">:a</span>  <span class="symbol">:b</span>  <span class="symbol">:c</span> ) ) </div><div class="line">    ( vector <span class="symbol">:a</span>  <span class="symbol">:b</span>  <span class="symbol">:c</span> ) )</div></pre></td></tr></table></figure>
 <h2 id="2-conj-加入列表"><a href="#2-conj-加入列表" class="headerlink" title="2. conj 加入列表"></a>2. conj 加入列表</h2><p> vector 和 list 顺序不同，list在前面，vector在后面<br> conj set 没有顺序</p>
 <h2 id="3-set-没有重复的"><a href="#3-set-没有重复的" class="headerlink" title="3. set 没有重复的  {}"></a>3. set 没有重复的  {}</h2> <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#&#123;1 2 3 4&#125;</div><div class="line"></div><div class="line">(set '(1 2 3 4))</div></pre></td></tr></table></figure>
@@ -214,6 +214,11 @@
 </ol>
 <figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">;累加器</span></div><div class="line">(<span class="name"><span class="builtin-name">defn</span></span> fun [sum x]</div><div class="line">    (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">pos?</span></span> x)</div><div class="line">        (<span class="name"><span class="builtin-name">recur</span></span> (<span class="name"><span class="builtin-name">+</span></span> sum x) (<span class="name"><span class="builtin-name">dec</span></span> x))</div><div class="line">        sum</div><div class="line">    )</div><div class="line">)</div></pre></td></tr></table></figure>
 <h2 id="8-drop-n-seq"><a href="#8-drop-n-seq" class="headerlink" title="8. drop n seq"></a>8. drop n seq</h2><figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">drop</span></span> <span class="number">3</span> [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>])</div><div class="line"></div><div class="line"><span class="comment">;=&gt;(4 5 6)</span></div><div class="line"><span class="comment">;去掉seq的前n个</span></div></pre></td></tr></table></figure>
+<h2 id="9-斐波那契数列"><a href="#9-斐波那契数列" class="headerlink" title="9. 斐波那契数列"></a>9. 斐波那契数列</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">#(take %</div><div class="line">    ((fn fib []</div><div class="line">        (lazy-cat [1 1]</div><div class="line">        (map + (fib) (rest (fib)))</div><div class="line">    ))</div><div class="line">)</div></pre></td></tr></table></figure>
+<h2 id="10-lazy-cat"><a href="#10-lazy-cat" class="headerlink" title="10. lazy-cat"></a>10. lazy-cat</h2><h2 id="11-apply"><a href="#11-apply" class="headerlink" title="11. apply"></a>11. apply</h2><p>将参数以list形式传给func，执行。</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="name"><span class="builtin-name">defn</span></span> func [a b c d] ())</div><div class="line"></div><div class="line">(<span class="name"><span class="builtin-name">apply</span></span> func [] arg0 arg1 arg2 arg3])</div></pre></td></tr></table></figure>
+<h2 id="12-re-seq-正则"><a href="#12-re-seq-正则" class="headerlink" title="12 re-seq 正则"></a>12 re-seq 正则</h2><figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">(<span class="name">re-seq</span> #<span class="string">"[A-Z]"</span> <span class="string">"abAB"</span>)</div><div class="line"></div><div class="line"><span class="comment">;=&gt;("A" "B")</span></div><div class="line"><span class="comment">;使用#"[A-Z]"来作为 pattern</span></div></pre></td></tr></table></figure>
+<h2 id="13-partition-by"><a href="#13-partition-by" class="headerlink" title="13 partition-by"></a>13 partition-by</h2><p>令<code>func</code> 作用与 <code>seq</code> ，将连续的结果相同的一部分分为一组<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="name">partition-by</span> func seq)</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -241,15 +246,15 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2017/09/10/Lambda表达式/">
+      <a class="prev" href="/2017/11/03/Java-实现-TCP-UDP-client-and-server/">
         <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">java Lambda表达式</span>
+        <span class="prev-text nav-default">Java 实现 TCP/UDP client and server</span>
         <span class="prev-text nav-mobile">Prev</span>
       </a>
     
     
-      <a class="next" href="/2017/09/02/多线程2-Runnable-Thread/">
-        <span class="next-text nav-default">多线程2 Runnable&Thread</span>
+      <a class="next" href="/2017/09/21/Map-Entry使用/">
+        <span class="next-text nav-default">Map.Entry使用</span>
         <span class="prev-text nav-mobile">Next</span>
         <i class="iconfont icon-right"></i>
       </a>

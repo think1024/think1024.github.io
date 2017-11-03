@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="新的开始！"/>
+  <meta name="description" content="Map.Entry使用"/>
 
 
 
+
+  <meta name="keywords" content="java, Zero space" />
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="https://think1024.github.io/archives/2017/02/"/>
+<link rel="canonical" href="https://think1024.github.io/2017/09/21/Map-Entry使用/"/>
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.5.0" />
@@ -71,11 +73,7 @@
 
 
 
-    <title>
-  
-    Archives - Zero space
-  
-</title>
+    <title> Map.Entry使用 - Zero space </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -169,115 +167,90 @@
           <div id="content" class="content">
             
   
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title">
-          <span class="archive-post-counter">
-            15 Posts In Total
-          </span>
-        </div>
-      
-    
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Map.Entry使用
+        
+      </h1>
 
-    
-      
+      <div class="post-meta">
+        <span class="post-time">
+          2017-09-21
+        </span>
         
-        
-
-        
-          
-          <div class="collection-title">
-            <h2 class="archive-year">2017</h2>
+          <div class="post-category">
+            
+              <a href="/categories/java/">java</a>
+            
           </div>
         
-      
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-22
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/02/22/arch安装/" class="archive-post-link">
-            arch安装
-          </a>
-        </span>
       </div>
-    
-      
-        
-        
+    </header>
 
-        
-      
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-09
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/02/09/Java笔记1/" class="archive-post-link">
-            Java笔记1
-          </a>
-        </span>
-      </div>
     
-      
-        
-        
+    
 
-        
+    <div class="post-content">
       
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-08
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/02/08/Hexo总结/" class="archive-post-link">
-            Hexo总结
-          </a>
-        </span>
-      </div>
-    
-      
-        
-        
+        <p>关于Map.Entry的使用。<br><a id="more"></a><br>Map.Entry相当于把Map的Key和Value放在一个对象里面。<br>遍历的时候，不用再根据keySet的key，使用额外的一次map.getKey()来获得value。提高了效率。</p>
+<p>如果只需要ValueSet的话，只需要foreach就可以了。</p>
+<p>几种方法的比较。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">HashMap&lt;Object,Object&gt; map = <span class="keyword">new</span> HashMap&lt;Object,Object&gt;();</div><div class="line"></div><div class="line"><span class="comment">//最原始的方法</span></div><div class="line">Iterator iterator = map.keySet().iterator();</div><div class="line"><span class="keyword">while</span>(iterator.hasNext()) &#123;</div><div class="line">	Object key = iterator.next();</div><div class="line">	Object val = map.get(key);</div><div class="line">	<span class="comment">//....</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//使用foreach方法</span></div><div class="line"><span class="keyword">for</span>(Object key:map.keySet()) &#123;</div><div class="line">	Object val = map.get(key);</div><div class="line">	<span class="comment">//....</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//使用map.entry</span></div><div class="line"><span class="keyword">for</span>(Entry&lt;Object,Object&gt; entry: map.entrySet()) &#123;</div><div class="line">	entry.getKey();</div><div class="line">	entry.getValue();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
-        
       
-      
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            02-08
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2017/02/08/hello-world/" class="archive-post-link">
-            Hello World
-          </a>
-        </span>
-      </div>
-    
-  </section>
+    </div>
 
-  
-  <nav class="pagination">
     
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/java/">java</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/09/21/clojure-note1/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">clojure note1</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/09/17/java-多维数组/">
+        <span class="next-text nav-default">java 多维数组</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>  
       </main>
@@ -364,6 +337,8 @@
     </div>
 
     
+  
+
 
 
     

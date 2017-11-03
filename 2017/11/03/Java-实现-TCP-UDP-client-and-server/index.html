@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Java 实现 TCP/UDP client and server"/>
+
+
+
+
+  <meta name="keywords" content="TCP, UDP, Java, Zero space" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Zero space">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.5.0" />
+
+
+
+<link rel="canonical" href="https://think1024.github.io/2017/11/03/Java-实现-TCP-UDP-client-and-server/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.5.0" />
+
+
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+    <title> Java 实现 TCP/UDP client and server - Zero space </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Zero space</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            Home
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            Archives
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            About
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Zero space</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              Home
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              Archives
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              About
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Java 实现 TCP/UDP client and server
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-11-03
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/Java/">Java</a>
+            
+          </div>
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP"><span class="toc-text">TCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP"><span class="toc-text">UDP</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>Java实现 TCP/UDP client和Server。</p>
+<p>对于TCP Server有2个服务，一个生成4个随机字母，一个返回日期。</p>
+<p>对于UDP Server，接收client发送的ip，然后会读取一个文件，文件中每一行是一条ip和houstName的对应的记录，  然后返回hostname.<br><a id="more"></a></p>
+<h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><p>首先是TCP客户端<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TCPClient</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> String host = <span class="string">"127.0.0.1"</span>;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> port = <span class="number">20018</span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getService</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line"></div><div class="line">			Socket socket = <span class="keyword">new</span> Socket(host,port);</div><div class="line">			System.out.println(<span class="string">"建立连接"</span>);</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				DataInputStream in = <span class="keyword">new</span> DataInputStream(socket.getInputStream());</div><div class="line">				DataOutputStream out = <span class="keyword">new</span> DataOutputStream(socket.getOutputStream());</div><div class="line">				</div><div class="line">				Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">				</div><div class="line">				<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</div><div class="line">					out.writeUTF(scanner.nextLine());</div><div class="line">					</div><div class="line">					System.out.println(<span class="string">"server =&gt; "</span>+in.readUTF());</div><div class="line">				&#125;</div><div class="line">			</div><div class="line">			&#125;<span class="keyword">finally</span> &#123;</div><div class="line">				</div><div class="line">				socket.close();</div><div class="line">				System.out.println(<span class="string">"关闭连接"</span>);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			System.out.println(<span class="string">"服务端关闭连接"</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">new</span> TCPClient().getService();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>TCP服务端<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TCPServer</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> port = <span class="number">20018</span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">new</span> TCPServer().service();</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//2种服务，1是随机4个字母，2是当前时间</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">()</span> </span>&#123;</div><div class="line">		</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			ServerSocket server = <span class="keyword">new</span> ServerSocket(port);</div><div class="line">			System.out.println(<span class="string">"started ..."</span>);</div><div class="line">			<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</div><div class="line">				Socket socket = server.accept();</div><div class="line">				<span class="comment">//接收一个请求后，就创建一个线程</span></div><div class="line">				TCPServerThread st = <span class="keyword">new</span> TCPServerThread(socket);</div><div class="line">				<span class="keyword">new</span> Thread(st).start();		</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;	</div><div class="line">		&#125;		</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>TCPServerThread<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TCPServerThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> Socket socket;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> port= <span class="number">20018</span>;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">TCPServerThread</span><span class="params">(Socket socket)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.socket = socket;</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line"></div><div class="line">		System.out.println(<span class="string">"新加入1个连接..."</span>);</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			<span class="keyword">try</span> &#123;</div><div class="line">				DataInputStream in = <span class="keyword">new</span> DataInputStream(socket.getInputStream());</div><div class="line">				DataOutputStream out = <span class="keyword">new</span> DataOutputStream(socket.getOutputStream());</div><div class="line">				</div><div class="line">				<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</div><div class="line">					String req = in.readUTF();</div><div class="line">					<span class="keyword">if</span>(req.equals(<span class="string">"q"</span>)) &#123; <span class="comment">//断开连接</span></div><div class="line">						<span class="keyword">break</span>;</div><div class="line">					&#125;</div><div class="line">					String resp = <span class="keyword">null</span>;</div><div class="line">					</div><div class="line">					<span class="keyword">switch</span>(req) &#123;</div><div class="line">					<span class="keyword">case</span> <span class="string">"1"</span>:</div><div class="line">						resp = generate4char();</div><div class="line">						<span class="keyword">break</span>;</div><div class="line">					<span class="keyword">case</span> <span class="string">"2"</span>:</div><div class="line">						resp = <span class="keyword">new</span> Date().toString();</div><div class="line">						<span class="keyword">break</span>;</div><div class="line">					<span class="keyword">default</span> :</div><div class="line">						resp =<span class="string">"请输入1或2,退出输入q"</span>;</div><div class="line">						<span class="keyword">break</span>;</div><div class="line">					&#125;</div><div class="line">					out.writeUTF(resp);</div><div class="line">				&#125;</div><div class="line">			&#125; <span class="keyword">finally</span> &#123;</div><div class="line">				System.out.println(<span class="string">"关闭1个连接..."</span>);</div><div class="line">				socket.close();</div><div class="line">			&#125;</div><div class="line">						</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			</div><div class="line">		&#125;	</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//返回随机生成的4个字母</span></div><div class="line">	<span class="function"><span class="keyword">private</span> String <span class="title">generate4char</span><span class="params">()</span> </span>&#123;</div><div class="line">		</div><div class="line">		Random r = <span class="keyword">new</span> Random();</div><div class="line">		</div><div class="line">		<span class="keyword">char</span> c1 = (<span class="keyword">char</span>)(r.nextInt(<span class="number">26</span>)+<span class="number">97</span>);</div><div class="line">		<span class="keyword">char</span> c2 = (<span class="keyword">char</span>)(r.nextInt(<span class="number">26</span>)+<span class="number">97</span>);</div><div class="line">		<span class="keyword">char</span> c3 = (<span class="keyword">char</span>)(r.nextInt(<span class="number">26</span>)+<span class="number">97</span>);</div><div class="line">		<span class="keyword">char</span> c4 = (<span class="keyword">char</span>)(r.nextInt(<span class="number">26</span>)+<span class="number">97</span>);</div><div class="line"></div><div class="line">		<span class="keyword">return</span> <span class="keyword">new</span> String(<span class="string">""</span>+c1+c2+c3+c4);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><p>UDP和TCP有些区别，Socket变成了报文Socket，DatagramSocket，接收的数据不再是流，变成了DatagramPacket。</p>
+<p>UDPClient<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UDPClient</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> port = <span class="number">20020</span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">		<span class="keyword">new</span> UDPClient().getService();</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getService</span><span class="params">()</span> </span>&#123;</div><div class="line">		</div><div class="line">		DatagramSocket socket = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			InetAddress addr = InetAddress.getByName(<span class="string">"127.0.0.1"</span>);</div><div class="line">			</div><div class="line">			System.out.println(<span class="string">"请输入hostname:"</span>);</div><div class="line">			<span class="comment">//从命令行读取数据</span></div><div class="line">			Scanner scanner = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">			String str  = scanner.nextLine();</div><div class="line"></div><div class="line">			<span class="keyword">byte</span>[] data = str.getBytes();</div><div class="line">			</div><div class="line">			socket = <span class="keyword">new</span> DatagramSocket();</div><div class="line">			</div><div class="line">			<span class="comment">//发送数据</span></div><div class="line">			DatagramPacket packet = <span class="keyword">new</span> DatagramPacket(data, data.length,addr,port);</div><div class="line">			socket.send(packet);</div><div class="line">			</div><div class="line">			<span class="comment">//接收数据</span></div><div class="line">			<span class="keyword">byte</span>[] data2 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">			DatagramPacket packet2 = <span class="keyword">new</span> DatagramPacket(data2, data2.length);</div><div class="line">			socket.receive(packet2);</div><div class="line">			</div><div class="line">			<span class="comment">//显示接收的数据</span></div><div class="line">			String info = <span class="keyword">new</span> String(data2);</div><div class="line">			System.out.println(info);</div><div class="line">			</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			System.out.println(<span class="string">"遇到错误"</span>);</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="keyword">if</span>(socket != <span class="keyword">null</span> ) &#123;</div><div class="line">				socket.close();</div><div class="line">			</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>UDPServer<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UDPServer</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> port = <span class="number">20020</span>;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		<span class="keyword">new</span> UDPServer().service();</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//client发送ip，返回hostname</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">service</span><span class="params">()</span> </span>&#123;</div><div class="line">		</div><div class="line">		DatagramSocket socket = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			socket = <span class="keyword">new</span> DatagramSocket(port);</div><div class="line">			<span class="keyword">byte</span>[] data = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</div><div class="line">			</div><div class="line">			System.out.println(<span class="string">"started..."</span>);</div><div class="line">			<span class="comment">//服务开启后一直运行</span></div><div class="line">			<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</div><div class="line">				DatagramPacket packet = <span class="keyword">new</span> DatagramPacket(data,<span class="number">0</span>,data.length);</div><div class="line">				socket.receive(packet);</div><div class="line">				<span class="comment">//接收一个请求后，就创建一个线程</span></div><div class="line">				UDPServerThread thread = <span class="keyword">new</span> UDPServerThread(socket, packet, data);</div><div class="line">				<span class="keyword">new</span> Thread(thread).start();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			</div><div class="line">		&#125; <span class="keyword">catch</span> (SocketException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125; <span class="keyword">finally</span> &#123;</div><div class="line">			<span class="keyword">if</span>(socket != <span class="keyword">null</span>) &#123;</div><div class="line">				socket.close();</div><div class="line">			&#125;</div><div class="line">			System.out.println(<span class="string">"end..."</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>UDPServerThread<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UDPServerThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">private</span> DatagramSocket socket;</div><div class="line">	<span class="keyword">private</span> DatagramPacket packet;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">byte</span>[] data;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">UDPServerThread</span><span class="params">(DatagramSocket socket,DatagramPacket packet,<span class="keyword">byte</span>[] data)</span> </span>&#123;</div><div class="line">		<span class="keyword">this</span>.socket = socket;</div><div class="line">		<span class="keyword">this</span>.packet = packet;</div><div class="line">		<span class="keyword">this</span>.data = data;</div><div class="line">	&#125;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="comment">//接收数据,将数据放到data里面</span></div><div class="line">		</div><div class="line">		String info = <span class="keyword">new</span>  String(data,<span class="number">0</span>,data.length);</div><div class="line">		</div><div class="line">		String resp = getHostname(info);</div><div class="line">		</div><div class="line">		<span class="comment">//发送数据到客户端</span></div><div class="line">		InetAddress  addr = packet.getAddress();</div><div class="line">		<span class="keyword">int</span> pt = packet.getPort();</div><div class="line">		</div><div class="line">		<span class="keyword">byte</span>[] dt = resp.getBytes();</div><div class="line">		</div><div class="line">		DatagramPacket pkt = <span class="keyword">new</span> DatagramPacket(dt,dt.length,addr,pt);</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			socket.send(pkt);</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">private</span> String <span class="title">getHostname</span><span class="params">(String info)</span> </span>&#123;</div><div class="line">		info = info.trim();</div><div class="line">		File file  = <span class="keyword">new</span> File(<span class="string">"hostname.txt"</span>);</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">		</div><div class="line">			BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> FileReader(file));</div><div class="line">			String line = <span class="keyword">null</span>;</div><div class="line">			<span class="keyword">while</span>((line = br.readLine()) != <span class="keyword">null</span> ) &#123;</div><div class="line">				String[] record = line.trim().split(<span class="string">"\\s+"</span>);<span class="comment">// hostname 和ip,空格分隔</span></div><div class="line">				</div><div class="line">				<span class="keyword">if</span>(record[<span class="number">0</span>].trim().equals(info) ) &#123;</div><div class="line">					<span class="keyword">return</span> record[<span class="number">1</span>];</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125; <span class="keyword">catch</span> (FileNotFoundException fe) &#123;</div><div class="line">			System.out.println(<span class="string">"没找到文件 "</span>);</div><div class="line">		&#125; <span class="keyword">catch</span> (IOException ioe) &#123;</div><div class="line">			</div><div class="line">		&#125; </div><div class="line">		<span class="keyword">return</span> <span class="string">"not found"</span>;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>通过上面的代码可以看出TCP和UDP的一些区别，TCP是面向连接的，UDP是不连接的，TCP是字节流，UDP是报文。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/TCP/">TCP</a>
+            
+              <a href="/tags/UDP/">UDP</a>
+            
+              <a href="/tags/Java/">Java</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2017/09/21/clojure-note1/">
+        <span class="next-text nav-default">clojure note1</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>  
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:think1024@qq.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+        
+          <a href="https://stackoverflow.com/" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/think1024" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Zero</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.5.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.5.0"></script>
+
+  </body>
+</html>
